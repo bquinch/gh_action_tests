@@ -1,4 +1,4 @@
-name: Deploy to staging
+name: Deploy with release
 
 on:
   push:
@@ -11,6 +11,8 @@ env:
 jobs:
   deploy-to-staging:
     runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - name: Checkout project
         uses: actions/checkout@v2
