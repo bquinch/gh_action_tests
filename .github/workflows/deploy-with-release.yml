@@ -5,11 +5,8 @@ on:
     branches:
       - production
 
-env:
-  SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-
 jobs:
-  deploy-to-staging:
+  deploy-with-release:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout project
@@ -25,10 +22,11 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          configuration: "config.json"
+          configuration: ".github/workflows/changelog_config.json"
+          release_branches: production
       - name: Create a GitHub release
         uses: ncipollo/release-action@v1
         with:
           tag: ${{ steps.tag_version.outputs.new_tag }}
-          name: Release ${{ steps.tag_version.outputs.new_tag }}
+          name: "ADMIN: ${{ steps.tag_version.outputs.new_tag }}"
           body: ${{steps.build_changelog.outputs.changelog}}
