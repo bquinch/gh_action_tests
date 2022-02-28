@@ -24,6 +24,8 @@ jobs:
         uses: mikepenz/release-changelog-builder-action@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          commitMode: false
       - name: Create a GitHub release
         uses: ncipollo/release-action@v1
         with:
