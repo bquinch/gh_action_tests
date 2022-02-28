@@ -9,6 +9,6 @@ class Caca {
   }
 
   private init() {
-    console.log(`I pooped a ${this.type} ${this.color}`);
+    console.log(`I pooped a ${this.type} ${this.color} LOL`);
   }
 }
